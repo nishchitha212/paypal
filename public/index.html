@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f5f4ef" />
+  <meta name="description" content="Mint turns your shopping goal into a thoughtful, budget-aware plan. Pay with PayPal." />
+  <title>Mint — thoughtful shopping, on your terms</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <div class="grain"></div>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Mint home"><span class="brand-mark"><i></i><i></i><i></i></span>mint<span class="brand-dot">.</span></a>
+    <nav class="nav-links"><a href="#how">How it works</a><a href="#promise">Our promise</a></nav>
+    <div class="top-actions"><span class="secure-label"><span class="secure-icon">⌑</span> PayPal secure checkout</span><button class="avatar" aria-label="Your profile">A</button></div>
+  </header>
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="eyebrow-dot"></span> YOUR AI SHOPPING COMPANION</div>
+        <h1>Good choices.<br /><span>Zero guesswork.</span></h1>
+        <p>Tell Mint what you need. Get a thoughtful shortlist that fits your budget, then check out with PayPal.</p>
+        <div class="hero-proof"><div class="proof-avatars"><span>A</span><span>M</span><span>J</span></div><span><b>Thoughtful by design</b><br />Your budget is always in charge.</span></div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="art-circle art-circle-one"></div><div class="art-circle art-circle-two"></div>
+        <div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
+        <div class="art-card"><div class="art-spark">✳</div><div class="art-label">YOUR NEXT GOOD CHOICE</div><div class="art-product"></div><div class="art-check">✓</div></div>
+        <div class="art-tag tag-top"><span>✦</span> Made for you</div><div class="art-tag tag-bottom"><span class="tag-check">✓</span> Under budget</div>
+        <span class="art-star star-one">✳</span><span class="art-star star-two">✴</span>
+      </div>
+    </section>
+    <section class="workspace" id="planner">
+      <aside class="step-rail">
+        <div class="rail-line"></div>
+        <div class="rail-step active"><span class="rail-number">01</span><span class="rail-title">Your idea</span><span class="rail-caption">Tell us what you need</span></div>
+        <div class="rail-step"><span class="rail-number">02</span><span class="rail-title">Your shortlist</span><span class="rail-caption">A plan made for you</span></div>
+        <div class="rail-step"><span class="rail-number">03</span><span class="rail-title">Checkout</span><span class="rail-caption">Pay with confidence</span></div>
+        <div class="rail-note"><span>✦</span><p>Good spending starts with a plan.</p></div>
+      </aside>
+      <section class="planner-card" aria-live="polite">
+        <div class="planner-heading">
+          <div><div class="section-kicker"><span class="tiny-star">✳</span> LET'S MAKE A PLAN</div><h2>What are you shopping for?</h2><p>Give Mint a little context. The more you share, the better the plan.</p></div>
+          <div class="ai-pill"><span></span> AI powered</div>
+        </div>
+        <form id="plan-form">
+          <label class="sr-only" for="goal">Describe what you are shopping for</label>
+          <div class="prompt-box"><textarea id="goal" maxlength="500" placeholder="e.g. I need a calm, comfortable setup for my daily train commute. Nothing too bulky." required></textarea><div class="prompt-bottom"><span id="char-count">0 / 500</span><button class="send-button" id="plan-button" type="submit"><span>Make my plan</span><b>↗</b></button></div></div>
+          <div class="suggestion-row"><span class="suggest-label">TRY A PROMPT</span><button type="button" class="suggestion" data-prompt="Help me get ready for my daily commute. I want quiet and a portable charger.">🚆 &nbsp;Daily commute</button><button type="button" class="suggestion" data-prompt="I need a lightweight travel kit for a weekend trip, staying under budget.">✈ &nbsp;Weekend away</button><button type="button" class="suggestion" data-prompt="I want to organize my everyday carry and protect my tech.">✦ &nbsp;Everyday carry</button></div>
+          <div class="budget-row"><div class="budget-title"><span class="budget-icon">$</span><div><b>Your comfortable budget</b><small>Mint won't go over it. Ever.</small></div></div><div class="budget-control"><input id="budget" type="range" min="50" max="200" value="120" step="5" /><output id="budget-value">$120</output></div></div>
+        </form>
+      </section>
+    </section>
+    <section class="results-section hidden" id="results">
+      <div class="results-header"><div><div class="section-kicker"><span class="tiny-star">✳</span> YOUR SHORTLIST</div><h2 id="result-title">A plan that feels right.</h2></div><button id="edit-plan" class="text-button">← Edit my plan</button></div>
+      <div class="result-layout">
+        <div class="product-column"><div class="insight-card"><div class="insight-icon">✦</div><div><b>Mint's thinking</b><p id="insight-copy"></p></div><span class="mode-badge" id="mode-badge"></span></div><div class="product-grid" id="product-grid"></div><div class="add-note"><span>✦</span> Your shortlist stays inside your budget. Add or remove anything you like.</div></div>
+        <aside class="summary-card"><div class="summary-top"><span>YOUR PLAN</span><span class="summary-spark">✳</span></div><h3>A better way to shop.</h3><p class="summary-sub">Good picks, considered together.</p><div class="summary-items" id="summary-items"></div><div class="summary-rule"></div><div class="summary-line"><span>Subtotal</span><b id="subtotal">$0</b></div><div class="summary-line saved-line"><span>Thoughtful savings</span><b id="savings">−$0</b></div><div class="summary-total"><span>Total today</span><b id="total">$0</b></div><div class="budget-meter"><div class="meter-label"><span>Budget left</span><b id="left">$0</b></div><div class="meter-track"><i id="meter-fill"></i></div><small id="meter-caption"></small></div><div class="paypal-area"><div id="paypal-button-container"></div><button id="demo-checkout" class="paypal-fallback hidden" type="button"><span class="paypal-word">Pay<span>Pal</span></span><span>Continue to secure checkout →</span></button><div class="or-divider"><span></span> Protected by PayPal <span></span></div><div class="trust-row"><span>⌑ PayPal Buyer Protection</span><span>↗ Encrypted checkout</span></div></div><p class="fine-print">No payment is processed in demo mode. Sandbox checkout uses PayPal's test environment.</p></aside>
+      </div>
+    </section>
+    <section class="how-section" id="how"><div class="how-heading"><div class="section-kicker"><span class="tiny-star">✳</span> A LITTLE MORE MINDFUL</div><h2>Shopping can feel<br />like <em>you</em> again.</h2></div><div class="how-cards"><article><div class="how-num">01</div><div class="how-icon lavender">✧</div><h3>Start with what matters</h3><p>Share your real-life need—not just a product name. Mint pays attention to context.</p></article><article><div class="how-num">02</div><div class="how-icon lemon">◌</div><h3>Get a plan, not a pile</h3><p>A few considered options make decisions easier. Your budget stays the boundary.</p></article><article><div class="how-num">03</div><div class="how-icon peach">↗</div><h3>Check out with confidence</h3><p>When you're ready, PayPal gives you a familiar, secure way to pay.</p></article></div></section>
+    <section class="promise-section" id="promise"><div class="promise-stamp">THE MINT<br />PROMISE <span>✳</span></div><div><div class="section-kicker">A BETTER RELATIONSHIP WITH SHOPPING</div><h2>Helpful AI.<br /><em>Human decisions.</em></h2><p>Mint can make a plan. You stay in control. We keep your budget visible, explain each pick, and let you decide what belongs in your cart.</p><div class="promise-list"><span>✓ &nbsp; No pressure to buy</span><span>✓ &nbsp; No budget surprises</span><span>✓ &nbsp; You make the final call</span></div></div></section>
+  </main>
+  <footer><a class="brand" href="#"><span class="brand-mark"><i></i><i></i><i></i></span>mint<span class="brand-dot">.</span></a><p>Thoughtful by design. Built with PayPal + AI.</p><span class="footer-right">A hackathon prototype · Sandbox only</span></footer>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
