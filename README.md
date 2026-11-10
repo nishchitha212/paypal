@@ -1,4 +1,6 @@
-# Mint — a calmer way to shop
+# paypal
+
+## Mint — a calmer way to shop
 
 **PayPal AI Hackathon submission** · Build What's Next with PayPal and AI
 
@@ -22,7 +24,11 @@ Requires Node.js 20 or newer. The app uses Node's built-in server and has no npm
 
 1. Copy .env.example to .env.
 2. Run node server.mjs from this folder.
-3. Open http://localhost:4173.
+3. Open http://localhost:4174.
+
+## GitHub Pages preview
+
+The repository root index redirects to the responsive static interface in public/. In GitHub, enable Pages for the main branch and root folder. Pages can show the interface and static demo planner, but it cannot run the Node server. On Pages, Mint uses a local sample planner and the checkout button is a demo only. For live AI and PayPal sandbox checkout, run or deploy server.mjs and configure the environment values below.
 
 ### Turn on live AI recommendations
 

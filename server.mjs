@@ -4,7 +4,7 @@ import { extname, join, normalize } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = fileURLToPath(new URL('.', import.meta.url));
-const port = Number(process.env.PORT || 4173);
+const port = Number(process.env.PORT || 4174);
 try {
   const envText = await readFile(join(root, '.env'), 'utf8');
   for (const line of envText.split(/\r?\n/)) {
@@ -69,6 +69,7 @@ const server=createServer(async(req,res)=>{
       const b=await bodyJson(req), ids=Array.isArray(b.ids)?b.ids.slice(0,6):[], items=ids.map(id=>catalog.find(p=>p.id===id)).filter(Boolean);
       if(!items.length)return send(res,400,{error:'Choose at least one item.'});
       const total=items.reduce((n,p)=>n+p.price,0).toFixed(2);
+      if(total>Number(b.budget||0))return send(res,400,{error:'That order exceeds the selected budget.'});
       const order=await paypalPost('/v2/checkout/orders',{intent:'CAPTURE',purchase_units:[{description:'Mint AI shopping plan',amount:{currency_code:'USD',value:total,breakdown:{item_total:{currency_code:'USD',value:total}}},items:items.map(p=>({name:p.name,quantity:'1',unit_amount:{currency_code:'USD',value:p.price.toFixed(2)}}))}],application_context:{brand_name:'Mint',shipping_preference:'NO_SHIPPING',user_action:'PAY_NOW'}});
       return send(res,200,{id:order.id});
     }
@@ -77,4 +78,4 @@ const server=createServer(async(req,res)=>{
     const file=join(root,'public',path);const data=await readFile(file);res.writeHead(200,{'content-type':mime[extname(file)]||'application/octet-stream'});res.end(data);
   } catch(error){const msg=error.message||'Something went wrong.';send(res,500,{error:msg});}
 });
-server.listen(port,()=>console.log('Mint is ready at http://localhost:'+port));
+server.listen(port,'127.0.0.1',()=>console.log('Mint is ready at http://localhost:'+port));
